@@ -1,0 +1,33 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/kushsharma/go-plug/proto";
+
+service Transformer {
+  rpc GetName(GetNameRequest) returns (GetNameResponse);
+  rpc GetDescription(GetDescriptionRequest) returns (GetDescriptionResponse);
+
+  rpc GenerateDependencies(GenerateDependenciesRequest) returns (GenerateDependenciesResponse);
+}
+
+message GetNameRequest{
+}
+
+message GetNameResponse{
+  string name = 1;
+}
+
+message GetDescriptionRequest{
+}
+
+message GetDescriptionResponse{
+  string description = 1;
+}
+
+message GenerateDependenciesRequest{
+  string random = 1;
+}
+
+message GenerateDependenciesResponse{
+  repeated string dependencies = 1;
+}
