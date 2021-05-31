@@ -10,7 +10,7 @@ build: generate-proto build-plugin ## build all
 
 build-plugin: ## build plugins
 	@echo " > building plugins"
-	go build -o ./plugins/sql/main ./plugins/sql/sql.go
+	go build -o ./plugin-sql ./plugins/sql/sql.go
 
 generate-proto: ## Generate proto files
 	@echo " > generating protos"
@@ -23,6 +23,9 @@ test: ## Run tests
 
 test-race: ## Run tests with race detector
 	go test -race ./...
+
+clean :
+	rm -rf dist
 
 fmt: ## Run gofmt linter
 ifeq "$(GOVERSION)" "12"

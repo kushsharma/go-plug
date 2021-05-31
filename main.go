@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/hashicorp/go-hclog"
 	"github.com/kushsharma/go-plug/transformer"
@@ -11,6 +12,9 @@ import (
 )
 
 func main() {
+	pluginPath := flag.String("plugin", "./plugin-sql", "path to plugin")
+	flag.Parse()
+
 	fmt.Println("starting go-plug core application")
 
 	// Create an hclog.Logger
@@ -35,13 +39,15 @@ func main() {
 		"transformer": &transformer.Plugin{},
 	}
 
+	//~/.optimus/plugins/...
+
 	// We're a host! Start by launching the plugin process.
 	client := plugin.NewClient(&plugin.ClientConfig{
 		HandshakeConfig: handshakeConfig,
 		Plugins:         pluginMap,
-		Cmd:             exec.Command("./plugins/sql/main"),
+		Cmd:             exec.Command(*pluginPath),
 		Logger:          logger,
-		AllowedProtocols: []plugin.Protocol{plugin.ProtocolNetRPC, plugin.ProtocolGRPC},
+		AllowedProtocols: []plugin.Protocol{plugin.ProtocolGRPC},
 	})
 	defer client.Kill()
 

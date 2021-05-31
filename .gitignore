@@ -18,4 +18,5 @@
 # vendor/
 
 /goplug
-/plugins/sql/main
+/dist/
+/plugin-sql
