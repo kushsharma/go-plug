@@ -49,3 +49,13 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+dockers:
+  -
+    goos: linux
+    goarch: amd64
+    binaries:
+      - core
+      - plugin-sql
+    dockerfile: Dockerfile
+    image_templates:
+      - 'ghcr.io/kushsharma/{{.ProjectName}}:{{ .Tag }}-amd64'

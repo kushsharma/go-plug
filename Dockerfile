@@ -1,12 +1,6 @@
-FROM golang:1.16-alpine
+FROM alpine:3.13
 
-WORKDIR /opt
-ENV GO111MODULE on
-ENV CGO_ENABLED 0
-
-COPY . .
-RUN go mod download
-RUN go build -o goplug .
-RUN go build -o ./plugin-sql ./plugins/sql/main.go
+COPY goplug /usr/bin/goplug
+COPY plugin-sql /usr/bin/plugin-sql
 
 CMD ["goplug", "--plugin", "./plugin-sql"]
