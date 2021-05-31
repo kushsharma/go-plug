@@ -19,9 +19,6 @@ generate-proto: ## Generate proto files
 check: test-race fmt vet lint ## Run tests and linters
 
 test: ## Run tests
-	go test ./... -race
-
-test-race: ## Run tests with race detector
 	go test -race ./...
 
 clean :
