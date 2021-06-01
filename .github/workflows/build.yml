@@ -34,9 +34,17 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
-      - name: Run GoReleaser
+      - name: Run GoReleaser for tags
         uses: goreleaser/goreleaser-action@v2.6.1
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           distribution: goreleaser
           version: latest
-          args: --snapshot --skip-publish --rm-dist
+          args: --rm-dist
+      - name: Run GoReleaser for branch
+        uses: goreleaser/goreleaser-action@v2.6.1
+        if: startsWith(github.ref, 'refs/heads/master')
+        with:
+          distribution: goreleaser
+          version: latest
+          args: --snapshot --rm-dist
