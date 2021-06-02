@@ -17,15 +17,9 @@ builds:
       - windows
     goarch:
       - amd64
+      - 386
       - arm
       - arm64
-    goarm:
-      - 5
-      - 6
-      - 7
-    ignore:
-      - goos: darwin
-        goarch: arm64
     env:
       - CGO_ENABLED=0
   - main: ./plugins/sql/main.go
@@ -37,15 +31,9 @@ builds:
       - windows
     goarch:
       - amd64
+      - 386
       - arm
       - arm64
-    goarm:
-      - 5
-      - 6
-      - 7
-    ignore:
-      - goos: darwin
-        goarch: arm64
     env:
       - CGO_ENABLED=0
 archives:
@@ -55,6 +43,9 @@ archives:
       windows: windows
       386: i386
       amd64: x86_64
+    format_overrides:
+      - goos: windows
+        format: zip
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -66,8 +57,7 @@ changelog:
       - '^docs:'
       - '^test:'
 dockers:
-  -
-    goos: linux
+  - goos: linux
     goarch: amd64
     ids:
       - core
@@ -77,11 +67,7 @@ dockers:
       - 'ghcr.io/kushsharma/{{.ProjectName}}:{{ .Tag }}-amd64'
 
 brews:
-  -
-    name: goplug
-    ids:
-      - core
-      - plugin-sql
+  - name: goplug
     tap:
       owner: kushsharma
       name: taps
@@ -90,3 +76,6 @@ brews:
     commit_author:
       name: optimus
       email: kush.sharma@gojek.com
+    install: |-
+      bin.install "goplug"
+      bin.install "plugin-sql"
