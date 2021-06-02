@@ -59,3 +59,19 @@ dockers:
     dockerfile: Dockerfile
     image_templates:
       - 'ghcr.io/kushsharma/{{.ProjectName}}:{{ .Tag }}-amd64'
+
+brews:
+  -
+    name: goplug
+    ids:
+      - core
+      - plugin-sql
+    tap:
+      owner: kushsharma
+      name: taps
+    goarm: 6
+    license: "MIT"
+    description: "Testing goplug"
+    commit_author:
+      name: optimus
+      email: kush.sharma@gojek.com
