@@ -21,6 +21,9 @@ check: test-race fmt vet lint ## Run tests and linters
 test: ## Run tests
 	go test -race ./...
 
+coverage: ## print code coverage
+	go test -race -coverprofile coverage.txt -covermode=atomic ./... -tags=unit_test && go tool cover -html=coverage.txt
+
 clean :
 	rm -rf dist
 
