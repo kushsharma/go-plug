@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -19,8 +20,16 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: '1.16'
-      - name: test binaries
+      - name: Test binaries
         run: make test
+      - name: Generate cover profile
+        run: make coverage
+      - name: Install goveralls and send coverage
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          go get github.com/mattn/goveralls
+          goveralls -coverprofile=coverage.txt -service=github
 
   build:
     runs-on: ubuntu-latest
