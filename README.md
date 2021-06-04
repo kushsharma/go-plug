@@ -8,3 +8,14 @@ make install
 make build
 ./goplug
 ```
+
+## Brew installation
+
+```
+brew install kushsharma/taps/go-plug
+```
+
+Run with
+```
+go-plug --plugin plugin-sql
+```
