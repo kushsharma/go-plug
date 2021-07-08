@@ -1,0 +1,1 @@
+(self.webpackChunkoptimus=self.webpackChunkoptimus||[]).push([[431],{7253:function(a){"use strict";a.exports=JSON.parse('{"allTagsPath":"/go-plug/blog/tags","slug":"hola","name":"hola","count":1,"permalink":"/go-plug/blog/tags/hola"}')}}]);
