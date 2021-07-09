@@ -49,3 +49,28 @@ jobs:
           distribution: goreleaser
           version: latest
           args: --snapshot --rm-dist
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Installation
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn
+          working-directory: docs
+      - name: Build docs
+        working-directory: docs
+        run: cd docs && yarn build
+      - name: Deploy docs
+        env:
+          GIT_USER: kushsharma
+          GIT_PASS: ${{ secrets.GH_PAT }}
+          DEPLOYMENT_BRANCH: gh-pages
+          CURRENT_BRANCH: main
+        working-directory: docs
+        run: |
+          git config --global user.email "3647166+kushsharma@users.noreply.github.com"
+          git config --global user.name "kushsharma"
+          yarn deploy
